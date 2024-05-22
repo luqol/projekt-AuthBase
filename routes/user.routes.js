@@ -4,8 +4,9 @@ const router = express.Router();
 router.get('/logged', (req, res) => {
 
   if (req.user){
-    console.log('res user: ' + JSON.stringify(req.user));
-    res.render('logged');
+    //console.log('res user: ' + JSON.stringify(req.user, null, 2));
+    res.render('logged', {name: req.user.displayName, avatar: req.user.photos[0].value});
+
   } else {
     res.redirect('/user/no-permission')
   }
@@ -18,7 +19,7 @@ router.get('/no-permission', (req, res) => {
 
 router.get('/profile', (req, res) => {
   if (req.user){
-    console.log('Name: ' + req.user.displayName);
+    //console.log('Name: ' + req.user.displayName);
     res.render('profile');
   } else {
     res.redirect('/user/no-permission')
@@ -27,7 +28,7 @@ router.get('/profile', (req, res) => {
 
 router.get('/profile/settings', (req, res) => {
   if (req.user){
-    console.log('Name: ' + req.user.displayName);
+    //console.log('Name: ' + req.user.displayName);
     res.render('settings');
   } else {
     res.redirect('/user/no-permission')
